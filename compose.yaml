@@ -17,3 +17,11 @@ services:
     depends_on:
       - prometheus
     privileged: true
+  k6:
+    image: grafana/k6:latest
+    ports:
+      - "6565:6565"
+    volumes:
+      - ./script.js:/script.js
+    command: run /script.js
+    network_mode: host # 또는 script.js에서 host.docker.internal 로 설정
